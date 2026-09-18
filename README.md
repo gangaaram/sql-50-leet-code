@@ -146,7 +146,7 @@ HAVING COUNT(e.id)>=5;
 SELECT s.user_id, ROUND(AVG(IF(c.action='confirmed',1,0)),2) AS confirmation_rate FROM Signups s
 LEFT JOIN Confirmations c
 ON s.user_id=c.user_id
-GROUP BY s.user_id
+GROUP BY s.user_id;
 ```
 ### 15. Not Boring Movies
 
@@ -155,16 +155,69 @@ GROUP BY s.user_id
 ```sql
 SELECT * FROM Cinema
 WHERE id%2!=0 AND description !='boring'
-ORDER BY rating DESC
+ORDER BY rating DESC;
 ```
 
 ### 16. Average Selling Price
 
-[LeetCode #620](https://leetcode.com/average-selling-price/)
+[LeetCode #1251](https://leetcode.com/average-selling-price/)
 
 ```sql
-SELECT * FROM Cinema
-WHERE id%2!=0 AND description !='boring'
-ORDER BY rating DESC
+SELECT p.product_id, IFNULL(ROUND(SUM(units*price)/SUM(units),2),0) AS average_price FROM Prices p
+LEFT JOIN UnitsSold u
+ON (p.product_id=u.product_id) AND (u.purchase_date BETWEEN start_date AND end_date)
+GROUP BY p.product_id;
 ```
 
+### 17. Project Employees I
+
+[LeetCode #1075](https://leetcode.com/project-employees-i/)
+
+```sql
+SELECT p.project_id, ROUND(AVG(experience_years),2) AS average_years FROM Project p
+LEFT JOIN Employee e
+ON p.employee_id = e.employee_id
+GROUP BY p.project_id;
+```
+
+### 18. Percentage of users Attended a Contest
+
+[LeetCode #1633](https://leetcode.com/percentage-of-users-attended-a-contest)
+
+```sql
+SELECT contest_id, ROUND(COUNT(user_id)/(SELECT COUNT(user_id)FROM Users)*100,2) AS percentage FROM Register
+GROUP BY contest_id
+ORDER BY percentage DESC, contest_id ASC;
+```
+
+### 19. Queries Quality and Percentage
+
+[LeetCode #1211](https://leetcode.com/queries-quality-and-percentage)
+
+```sql
+SELECT query_name, ROUND(AVG(rating/position),2) AS quality,
+ROUND(SUM(IF(rating<3,1,0))/COUNT(result)*100,2) AS poor_query_percentage
+FROM Queries
+GROUP BY query_name;
+```
+
+### 20. Monthly Transactions I
+
+[LeetCode #1193](https://leetcode.com/monthly-transactions-i)
+
+```sql
+SELECT LEFT(trans_date,7) AS month, country, COUNT(id) AS trans_count,
+SUM(IF(state='approved',1,0)) AS approved_count,
+SUM(amount) AS trans_total_amount,
+SUM(IF(state='approved',amount,0)) AS approved_total_amount
+FROM Transactions
+GROUP BY month, Country;
+```
+
+### 21. Immediate Food Delivery II
+
+[LeetCode #1174](https://leetcode.com/immediate-food-delivery-ii)
+
+```sql
+
+```
