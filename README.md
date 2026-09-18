@@ -143,7 +143,28 @@ HAVING COUNT(e.id)>=5;
 [LeetCode #1934](https://leetcode.com/confirmation-rate/)
 
 ```sql
+SELECT s.user_id, ROUND(AVG(IF(c.action='confirmed',1,0)),2) AS confirmation_rate FROM Signups s
+LEFT JOIN Confirmations c
+ON s.user_id=c.user_id
+GROUP BY s.user_id
+```
+### 15. Not Boring Movies
 
+[LeetCode #620](https://leetcode.com/not-boring-movies/)
+
+```sql
+SELECT * FROM Cinema
+WHERE id%2!=0 AND description !='boring'
+ORDER BY rating DESC
 ```
 
+### 16. Average Selling Price
+
+[LeetCode #620](https://leetcode.com/average-selling-price/)
+
+```sql
+SELECT * FROM Cinema
+WHERE id%2!=0 AND description !='boring'
+ORDER BY rating DESC
+```
 
