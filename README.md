@@ -118,7 +118,32 @@ WHERE bonus<1000 OR bonus IS NULL;
 [LeetCode #1280](https://leetcode.com/students-and-examinations/)
 
 ```sql
-SELECT name, bonus FROM Employee e
-LEFT JOIN Bonus b on e.empId=b.empId
-WHERE bonus<1000 OR bonus IS NULL;
+SELECT st.student_id,st.student_name,s.subject_name, COUNT(e.subject_name) AS attended_exams FROM Students st
+CROSS JOIN Subjects s
+LEFT JOIN Examinations e
+ON st.student_id=e.student_id AND s.subject_name=e.subject_name
+GROUP BY st.student_id,st.student_name,s.subject_name
+ORDER BY st.student_id, s.subject_name;
 ```
+
+### 13. Managers with at Least 5 Direct Reports
+
+[LeetCode #570](https://leetcode.com/managers-with-at-least-5-direct-reports/)
+
+```sql
+SELECT e.name FROM Employee e
+CROSS JOIN Employee e2
+WHERE e.id=e2.managerId 
+GROUP BY e.name,e.id
+HAVING COUNT(e.id)>=5;
+```
+
+### 14. Confirmation Rate
+
+[LeetCode #1934](https://leetcode.com/confirmation-rate/)
+
+```sql
+
+```
+
+
