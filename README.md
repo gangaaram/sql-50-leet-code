@@ -337,7 +337,7 @@ WHERE primary_flag='Y' OR employee_id IN (
     SELECT employee_id FROM Employee
     GROUP BY employee_id
     HAVING COUNT(*)=1
-)
+);
 ```
 
 ### 32. Triangle Judgement
@@ -345,13 +345,41 @@ WHERE primary_flag='Y' OR employee_id IN (
 [LeetCode #610](https://leetcode.com/triangle-judgement/)
 
 ```sql
-SELECT *, IF(x+y>z AND x+z>y AND y+z>x, 'Yes', 'No') AS triangle FROM Triangle
+SELECT *, IF(x+y>z AND x+z>y AND y+z>x, 'Yes', 'No') AS triangle FROM Triangle;
 ```
 
 ### 33. Consecutive Numbers
 
 [LeetCode #180](https://leetcode.com/consecutive-numbers/)
 
+```sql
+SELECT DISTINCT(IF(l.num=ll.num AND l.num=lll.num AND ll.num=lll.num,l.num,NULL)) AS ConsecutiveNums FROM Logs l
+LEFT JOIN Logs ll
+ON l.id=ll.id-1
+LEFT JOIN Logs lll
+ON l.id=lll.id-2
+HAVING ConsecutiveNums IS NOT NULL;
+```
+
+### 34. Product Price at a Given Date
+
+[LeetCode #1164](https://leetcode.com/product-price-at-a-given-date/)
+```sql
+SELECT product_id, 10 AS price FROM Products
+GROUP BY product_id
+HAVING MIN(change_date) > '2019-08-16'
+UNION
+SELECT product_id, new_price FROM products
+WHERE (product_id,change_date) IN (
+    SELECT product_id, MAX(change_date) AS change_date FROM products
+WHERE change_date<='2019-08-16'
+GROUP BY product_id
+)
+```
+
+### 35. Last Person to Fit in the Bus
+
+[LeetCode #1204](https://leetcode.com/last-person-to-fit-in-the-bus/)
 ```sql
 
 ```
