@@ -308,5 +308,50 @@ HAVING COUNT(num) =1
 [LeetCode #1045](https://leetcode.com/customers-who-bought-all-products/)
 
 ```sql
+SELECT customer_id FROM Customer c
+GROUP BY c.customer_id
+HAVING COUNT(DISTINCT c.product_key)=(SELECT COUNT(*) FROM Product);
+```
+
+### 30. The Number of Employees Which Report to Each Employee
+
+[LeetCode #1731](https://leetcode.com/the-number-of-employees-which-report-to-each-employee/)
+
+```sql
+SELECT e.employee_id, e.name, COUNT(*) AS reports_count, ROUND(AVG(ee.age),0) AS average_age FROM Employees e
+LEFT JOIN Employees ee
+ON ee.reports_to=e.employee_id
+WHERE ee.reports_to IS NOT NULL
+GROUP BY e.employee_id
+ORDER BY e.employee_id;
+```
+
+### 31. Primary Department for Each Employee
+
+[LeetCode #1789](https://leetcode.com/primary-department-for-each-employee/)
+
+```sql
+SELECT employee_id, department_id
+FROM Employee
+WHERE primary_flag='Y' OR employee_id IN (
+    SELECT employee_id FROM Employee
+    GROUP BY employee_id
+    HAVING COUNT(*)=1
+)
+```
+
+### 32. Triangle Judgement
+
+[LeetCode #610](https://leetcode.com/triangle-judgement/)
+
+```sql
+SELECT *, IF(x+y>z AND x+z>y AND y+z>x, 'Yes', 'No') AS triangle FROM Triangle
+```
+
+### 33. Consecutive Numbers
+
+[LeetCode #180](https://leetcode.com/consecutive-numbers/)
+
+```sql
 
 ```
