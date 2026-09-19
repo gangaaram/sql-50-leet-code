@@ -219,5 +219,94 @@ GROUP BY month, Country;
 [LeetCode #1174](https://leetcode.com/immediate-food-delivery-ii)
 
 ```sql
+SELECT ROUND(COUNT(IF(order_date=customer_pref_delivery_date,1,NULL))/COUNT(customer_id)*100,2) AS immediate_percentage FROM Delivery
+WHERE (customer_id,order_date) IN (
+SELECT customer_id, MIN(order_date) AS order_date 
+FROM Delivery
+GROUP BY customer_id
+);
+```
+
+### 22. Game Play Analysis IV
+
+[LeetCode #550](https://leetcode.com/game-play-analysis-iv/)
+
+```sql
+SELECT ROUND(COUNT(a.player_id)/(SELECT COUNT(DISTINCT player_id) FROM Activity),2) AS fraction FROM Activity a LEFT JOIN
+(
+SELECT player_id, MIN(event_date) AS event_date FROM Activity 
+GROUP BY player_id
+) aa ON a.player_id=aa.player_id
+WHERE a.event_date=DATE_ADD(aa.event_date, INTERVAL 1 day);
+```
+
+### 23. Number of Unique Subjects Taught by Each Teacher
+
+[LeetCode #2356](https://leetcode.com/number-of-unique-subjects-taught-by-each-teacher/)
+
+```sql
+SELECT teacher_id, COUNT(DISTINCT subject_id) AS cnt FROM Teacher
+GROUP BY teacher_id;
+```
+
+### 24. User Activity for the Past 30 Days I
+
+[LeetCode #1141](https://leetcode.com/user-activity-for-the-past-30-days-i/)
+
+```sql
+SELECT activity_date as day, COUNT(DISTINCT user_id) AS active_users FROM Activity
+WHERE activity_date BETWEEN DATE_SUB('2019-07-27', INTERVAL 29 DAY) AND '2019-07-27'
+GROUP BY activity_date;
+```
+
+### 25. Product Sales Analysis III
+
+[LeetCode #1070](https://leetcode.com/product-sales-analysis-iii)
+
+```sql
+SELECT product_id, year AS first_year, quantity, price FROM Sales 
+WHERE (product_id, year) IN (
+SELECT product_id, MIN(year) AS year FROM Sales
+GROUP BY product_id
+);
+```
+
+### 26. Classes With at Least 5 students
+
+[LeetCode #596](https://leetcode.com/classes-with-at-least-5-students/)
+
+```sql
+SELECT class FROM Courses
+GROUP BY class
+HAVING COUNT(student) >=5;
+```
+
+### 27. Find Followers Count
+
+[LeetCode #1729](https://leetcode.com/find-followers-count/)
+
+```sql
+SELECT user_id,COUNT(follower_id) AS followers_count FROM Followers
+GROUP BY user_id
+ORDER BY user_id ASC;
+```
+
+### 28. Biggest Single Number
+
+[LeetCode #619](https://leetcode.com/biggest-single-number/)
+
+```sql
+SELECT MAX(num) AS num FROM(
+SELECT num FROM MyNumbers
+GROUP BY num
+HAVING COUNT(num) =1
+) a;
+```
+
+### 29. Customers Who Bought All Products
+
+[LeetCode #1045](https://leetcode.com/customers-who-bought-all-products/)
+
+```sql
 
 ```
