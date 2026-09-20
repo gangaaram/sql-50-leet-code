@@ -381,5 +381,97 @@ GROUP BY product_id
 
 [LeetCode #1204](https://leetcode.com/last-person-to-fit-in-the-bus/)
 ```sql
+SELECT q.person_name FROM Queue q 
+LEFT JOIN Queue qq ON q.turn >= qq.turn
+GROUP BY q.turn
+HAVING SUM(qq.weight) <= 1000
+ORDER BY sum(qq.weight) DESC
+LIMIT 1;
 
+OR
+
+SELECT person_name FROM (
+SELECT person_name, SUM(weight) OVER(ORDER BY turn) AS total_weight
+FROM Queue
+) a WHERE total_weight<=1000
+ORDER BY total_weight DESC
+LIMIT 1;
 ```
+### 35. Last Person to Fit in the Bus
+
+[LeetCode #1204](https://leetcode.com/last-person-to-fit-in-the-bus/)
+```sql
+SELECT q.person_name FROM Queue q 
+LEFT JOIN Queue qq ON q.turn >= qq.turn
+GROUP BY q.turn
+HAVING SUM(qq.weight) <= 1000
+ORDER BY sum(qq.weight) DESC
+LIMIT 1;
+
+OR
+
+SELECT person_name FROM (
+SELECT person_name, SUM(weight) OVER(ORDER BY turn) AS total_weight
+FROM Queue
+) a WHERE total_weight<=1000
+ORDER BY total_weight DESC
+LIMIT 1;
+```
+### 35. Last Person to Fit in the Bus
+
+[LeetCode #1204](https://leetcode.com/last-person-to-fit-in-the-bus/)
+```sql
+SELECT q.person_name FROM Queue q 
+LEFT JOIN Queue qq ON q.turn >= qq.turn
+GROUP BY q.turn
+HAVING SUM(qq.weight) <= 1000
+ORDER BY sum(qq.weight) DESC
+LIMIT 1;
+
+OR
+
+SELECT person_name FROM (
+SELECT person_name, SUM(weight) OVER(ORDER BY turn) AS total_weight
+FROM Queue
+) a WHERE total_weight<=1000
+ORDER BY total_weight DESC
+LIMIT 1;
+```
+
+### 36. Count Salary Categories
+
+[LeetCode #1907](https://leetcode.com/count-salary-categories/)
+```sql
+SELECT "Low Salary" AS category, SUM(income<20000) AS accounts_count FROM Accounts
+UNION ALL
+SELECT "Average Salary" AS category, SUM(income BETWEEN 20000 AND 50000) AS accounts_count FROM Accounts
+UNION ALL
+SELECT "High Salary" AS category, SUM(income> 50000) AS accounts_count FROM Accounts
+```
+
+### 37. Employees Whose Manager Left the Company
+
+[LeetCode #1978](https://leetcode.com/employees-whose-manager-left-the-company/)
+```sql
+SELECT employee_id FROM Employees
+WHERE manager_id IS NOT NULL AND manager_id NOT IN (SELECT employee_id from Employees) AND salary<30000
+ORDER BY employee_id
+```
+
+### 38. Exchange Seats
+
+[LeetCode #626](https://leetcode.com/exchange-seats/)
+```sql
+SELECT 
+CASE
+    WHEN id%2=1 AND id+1 IN (SELECT id FROM Seat) THEN id+1
+    WHEN id%2=0 THEN id-1
+    ELSE id
+END AS id, student
+FROM Seat
+ORDER BY id
+```
+
+
+
+
