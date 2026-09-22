@@ -472,6 +472,30 @@ FROM Seat
 ORDER BY id
 ```
 
+### 39. Movie Rating
 
+[LeetCode #626](https://leetcode.com/movie-rating/)
+```sql
+(SELECT name AS results FROM MovieRating mr
+LEFT JOIN Users u
+ON u.user_id = mr.user_id
+GROUP BY u.user_id
+ORDER BY COUNT(*) DESC, name ASC
+LIMIT 1)
+UNION ALL
+(SELECT title as results FROM MovieRating mr
+LEFT JOIN Movies m
+ON mr.movie_id = m.movie_id
+WHERE LEFT(created_at, 7) = '2020-02'
+GROUP BY mr.movie_id
+ORDER BY AVG(rating) DESC, title ASC
+LIMIT 1);
+```
 
+### 40. Restaurant Growth
+
+[LeetCode #1321](https://leetcode.com/restaurant-growth/)
+```sql
+
+```
 
