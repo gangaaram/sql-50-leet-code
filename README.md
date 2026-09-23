@@ -105,7 +105,7 @@ GROUP BY a1.machine_id;
 
 ### 11. Employee Bonus
 
-[LeetCode #577](https://leetcode.com/employee-bonus/)
+[LeetCode #577](https://leetcode.com/problems/employee-bonus/)
 
 ```sql
 SELECT name, bonus FROM Employee e
@@ -115,7 +115,7 @@ WHERE bonus<1000 OR bonus IS NULL;
 
 ### 12. Students and Examinations
 
-[LeetCode #1280](https://leetcode.com/students-and-examinations/)
+[LeetCode #1280](https://leetcode.com/problems/students-and-examinations/)
 
 ```sql
 SELECT st.student_id,st.student_name,s.subject_name, COUNT(e.subject_name) AS attended_exams FROM Students st
@@ -128,7 +128,7 @@ ORDER BY st.student_id, s.subject_name;
 
 ### 13. Managers with at Least 5 Direct Reports
 
-[LeetCode #570](https://leetcode.com/managers-with-at-least-5-direct-reports/)
+[LeetCode #570](https://leetcode.com/problems/managers-with-at-least-5-direct-reports/)
 
 ```sql
 SELECT e.name FROM Employee e
@@ -140,7 +140,7 @@ HAVING COUNT(e.id)>=5;
 
 ### 14. Confirmation Rate
 
-[LeetCode #1934](https://leetcode.com/confirmation-rate/)
+[LeetCode #1934](https://leetcode.com/problems/confirmation-rate/)
 
 ```sql
 SELECT s.user_id, ROUND(AVG(IF(c.action='confirmed',1,0)),2) AS confirmation_rate FROM Signups s
@@ -150,7 +150,7 @@ GROUP BY s.user_id;
 ```
 ### 15. Not Boring Movies
 
-[LeetCode #620](https://leetcode.com/not-boring-movies/)
+[LeetCode #620](https://leetcode.com/problems/not-boring-movies/)
 
 ```sql
 SELECT * FROM Cinema
@@ -160,7 +160,7 @@ ORDER BY rating DESC;
 
 ### 16. Average Selling Price
 
-[LeetCode #1251](https://leetcode.com/average-selling-price/)
+[LeetCode #1251](https://leetcode.com/problems/average-selling-price/)
 
 ```sql
 SELECT p.product_id, IFNULL(ROUND(SUM(units*price)/SUM(units),2),0) AS average_price FROM Prices p
@@ -171,7 +171,7 @@ GROUP BY p.product_id;
 
 ### 17. Project Employees I
 
-[LeetCode #1075](https://leetcode.com/project-employees-i/)
+[LeetCode #1075](https://leetcode.com/problems/project-employees-i/)
 
 ```sql
 SELECT p.project_id, ROUND(AVG(experience_years),2) AS average_years FROM Project p
@@ -182,7 +182,7 @@ GROUP BY p.project_id;
 
 ### 18. Percentage of users Attended a Contest
 
-[LeetCode #1633](https://leetcode.com/percentage-of-users-attended-a-contest)
+[LeetCode #1633](https://leetcode.com/problems/percentage-of-users-attended-a-contest)
 
 ```sql
 SELECT contest_id, ROUND(COUNT(user_id)/(SELECT COUNT(user_id)FROM Users)*100,2) AS percentage FROM Register
@@ -192,7 +192,7 @@ ORDER BY percentage DESC, contest_id ASC;
 
 ### 19. Queries Quality and Percentage
 
-[LeetCode #1211](https://leetcode.com/queries-quality-and-percentage)
+[LeetCode #1211](https://leetcode.com/problems/queries-quality-and-percentage)
 
 ```sql
 SELECT query_name, ROUND(AVG(rating/position),2) AS quality,
@@ -203,7 +203,7 @@ GROUP BY query_name;
 
 ### 20. Monthly Transactions I
 
-[LeetCode #1193](https://leetcode.com/monthly-transactions-i)
+[LeetCode #1193](https://leetcode.com/problems/monthly-transactions-i)
 
 ```sql
 SELECT LEFT(trans_date,7) AS month, country, COUNT(id) AS trans_count,
@@ -216,7 +216,7 @@ GROUP BY month, Country;
 
 ### 21. Immediate Food Delivery II
 
-[LeetCode #1174](https://leetcode.com/immediate-food-delivery-ii)
+[LeetCode #1174](https://leetcode.com/problems/immediate-food-delivery-ii)
 
 ```sql
 SELECT ROUND(COUNT(IF(order_date=customer_pref_delivery_date,1,NULL))/COUNT(customer_id)*100,2) AS immediate_percentage FROM Delivery
@@ -229,7 +229,7 @@ GROUP BY customer_id
 
 ### 22. Game Play Analysis IV
 
-[LeetCode #550](https://leetcode.com/game-play-analysis-iv/)
+[LeetCode #550](https://leetcode.com/problems/game-play-analysis-iv/)
 
 ```sql
 SELECT ROUND(COUNT(a.player_id)/(SELECT COUNT(DISTINCT player_id) FROM Activity),2) AS fraction FROM Activity a LEFT JOIN
@@ -242,7 +242,7 @@ WHERE a.event_date=DATE_ADD(aa.event_date, INTERVAL 1 day);
 
 ### 23. Number of Unique Subjects Taught by Each Teacher
 
-[LeetCode #2356](https://leetcode.com/number-of-unique-subjects-taught-by-each-teacher/)
+[LeetCode #2356](https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/)
 
 ```sql
 SELECT teacher_id, COUNT(DISTINCT subject_id) AS cnt FROM Teacher
@@ -251,7 +251,7 @@ GROUP BY teacher_id;
 
 ### 24. User Activity for the Past 30 Days I
 
-[LeetCode #1141](https://leetcode.com/user-activity-for-the-past-30-days-i/)
+[LeetCode #1141](https://leetcode.com/problems/user-activity-for-the-past-30-days-i/)
 
 ```sql
 SELECT activity_date as day, COUNT(DISTINCT user_id) AS active_users FROM Activity
@@ -261,7 +261,7 @@ GROUP BY activity_date;
 
 ### 25. Product Sales Analysis III
 
-[LeetCode #1070](https://leetcode.com/product-sales-analysis-iii)
+[LeetCode #1070](https://leetcode.com/problems/product-sales-analysis-iii)
 
 ```sql
 SELECT product_id, year AS first_year, quantity, price FROM Sales 
@@ -273,7 +273,7 @@ GROUP BY product_id
 
 ### 26. Classes With at Least 5 students
 
-[LeetCode #596](https://leetcode.com/classes-with-at-least-5-students/)
+[LeetCode #596](https://leetcode.com/problems/classes-with-at-least-5-students/)
 
 ```sql
 SELECT class FROM Courses
@@ -283,7 +283,7 @@ HAVING COUNT(student) >=5;
 
 ### 27. Find Followers Count
 
-[LeetCode #1729](https://leetcode.com/find-followers-count/)
+[LeetCode #1729](https://leetcode.com/problems/find-followers-count/)
 
 ```sql
 SELECT user_id,COUNT(follower_id) AS followers_count FROM Followers
@@ -293,7 +293,7 @@ ORDER BY user_id ASC;
 
 ### 28. Biggest Single Number
 
-[LeetCode #619](https://leetcode.com/biggest-single-number/)
+[LeetCode #619](https://leetcode.com/problems/iggest-single-number/)
 
 ```sql
 SELECT MAX(num) AS num FROM(
@@ -305,7 +305,7 @@ HAVING COUNT(num) =1
 
 ### 29. Customers Who Bought All Products
 
-[LeetCode #1045](https://leetcode.com/customers-who-bought-all-products/)
+[LeetCode #1045](https://leetcode.com/problems/customers-who-bought-all-products/)
 
 ```sql
 SELECT customer_id FROM Customer c
@@ -315,7 +315,7 @@ HAVING COUNT(DISTINCT c.product_key)=(SELECT COUNT(*) FROM Product);
 
 ### 30. The Number of Employees Which Report to Each Employee
 
-[LeetCode #1731](https://leetcode.com/the-number-of-employees-which-report-to-each-employee/)
+[LeetCode #1731](https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/)
 
 ```sql
 SELECT e.employee_id, e.name, COUNT(*) AS reports_count, ROUND(AVG(ee.age),0) AS average_age FROM Employees e
@@ -328,7 +328,7 @@ ORDER BY e.employee_id;
 
 ### 31. Primary Department for Each Employee
 
-[LeetCode #1789](https://leetcode.com/primary-department-for-each-employee/)
+[LeetCode #1789](https://leetcode.com/problems/primary-department-for-each-employee/)
 
 ```sql
 SELECT employee_id, department_id
@@ -342,7 +342,7 @@ WHERE primary_flag='Y' OR employee_id IN (
 
 ### 32. Triangle Judgement
 
-[LeetCode #610](https://leetcode.com/triangle-judgement/)
+[LeetCode #610](https://leetcode.com/problems/triangle-judgement/)
 
 ```sql
 SELECT *, IF(x+y>z AND x+z>y AND y+z>x, 'Yes', 'No') AS triangle FROM Triangle;
@@ -350,7 +350,7 @@ SELECT *, IF(x+y>z AND x+z>y AND y+z>x, 'Yes', 'No') AS triangle FROM Triangle;
 
 ### 33. Consecutive Numbers
 
-[LeetCode #180](https://leetcode.com/consecutive-numbers/)
+[LeetCode #180](https://leetcode.com/problems/consecutive-numbers/)
 
 ```sql
 SELECT DISTINCT(IF(l.num=ll.num AND l.num=lll.num AND ll.num=lll.num,l.num,NULL)) AS ConsecutiveNums FROM Logs l
@@ -363,7 +363,7 @@ HAVING ConsecutiveNums IS NOT NULL;
 
 ### 34. Product Price at a Given Date
 
-[LeetCode #1164](https://leetcode.com/product-price-at-a-given-date/)
+[LeetCode #1164](https://leetcode.com/problems/product-price-at-a-given-date/)
 ```sql
 SELECT product_id, 10 AS price FROM Products
 GROUP BY product_id
@@ -379,7 +379,7 @@ GROUP BY product_id
 
 ### 35. Last Person to Fit in the Bus
 
-[LeetCode #1204](https://leetcode.com/last-person-to-fit-in-the-bus/)
+[LeetCode #1204](https://leetcode.com/problems/last-person-to-fit-in-the-bus/)
 ```sql
 SELECT q.person_name FROM Queue q 
 LEFT JOIN Queue qq ON q.turn >= qq.turn
@@ -399,7 +399,7 @@ LIMIT 1;
 ```
 ### 35. Last Person to Fit in the Bus
 
-[LeetCode #1204](https://leetcode.com/last-person-to-fit-in-the-bus/)
+[LeetCode #1204](https://leetcode.com/problems/last-person-to-fit-in-the-bus/)
 ```sql
 SELECT q.person_name FROM Queue q 
 LEFT JOIN Queue qq ON q.turn >= qq.turn
@@ -419,7 +419,7 @@ LIMIT 1;
 ```
 ### 35. Last Person to Fit in the Bus
 
-[LeetCode #1204](https://leetcode.com/last-person-to-fit-in-the-bus/)
+[LeetCode #1204](https://leetcode.com/problems/last-person-to-fit-in-the-bus/)
 ```sql
 SELECT q.person_name FROM Queue q 
 LEFT JOIN Queue qq ON q.turn >= qq.turn
@@ -440,7 +440,7 @@ LIMIT 1;
 
 ### 36. Count Salary Categories
 
-[LeetCode #1907](https://leetcode.com/count-salary-categories/)
+[LeetCode #1907](https://leetcode.com/problems/count-salary-categories/)
 ```sql
 SELECT "Low Salary" AS category, SUM(income<20000) AS accounts_count FROM Accounts
 UNION ALL
@@ -451,7 +451,7 @@ SELECT "High Salary" AS category, SUM(income> 50000) AS accounts_count FROM Acco
 
 ### 37. Employees Whose Manager Left the Company
 
-[LeetCode #1978](https://leetcode.com/employees-whose-manager-left-the-company/)
+[LeetCode #1978](https://leetcode.com/problems/employees-whose-manager-left-the-company/)
 ```sql
 SELECT employee_id FROM Employees
 WHERE manager_id IS NOT NULL AND manager_id NOT IN (SELECT employee_id from Employees) AND salary<30000
@@ -460,7 +460,7 @@ ORDER BY employee_id
 
 ### 38. Exchange Seats
 
-[LeetCode #626](https://leetcode.com/exchange-seats/)
+[LeetCode #626](https://leetcode.com/problems/exchange-seats/)
 ```sql
 SELECT 
 CASE
@@ -474,7 +474,7 @@ ORDER BY id
 
 ### 39. Movie Rating
 
-[LeetCode #626](https://leetcode.com/movie-rating/)
+[LeetCode #626](https://leetcode.com/problems/movie-rating/)
 ```sql
 (SELECT name AS results FROM MovieRating mr
 LEFT JOIN Users u
@@ -494,7 +494,41 @@ LIMIT 1);
 
 ### 40. Restaurant Growth
 
-[LeetCode #1321](https://leetcode.com/restaurant-growth/)
+[LeetCode #1321](https://leetcode.com/problems/restaurant-growth/)
+```sql
+SELECT c.visited_on, SUM(cc.amount) AS amount, ROUND(AVG(cc.amount),2) as average_amount FROM (
+(SELECT c.visited_on, SUM(amount) AS amount
+FROM Customer c
+GROUP BY c.visited_on) c
+LEFT JOIN 
+(SELECT c.visited_on, SUM(amount) AS amount
+FROM Customer c
+GROUP BY c.visited_on) cc
+ON c.visited_on>=cc.visited_on AND DATEDIFF(c.visited_on,cc.visited_on)<=6
+) GROUP BY c.visited_on
+HAVING COUNT(*)=7
+ORDER BY c.visited_on ASC
+```
+
+### 41. Friend Requests II: Who Has the Most Friends
+
+[LeetCode #1321](https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/)
+```sql
+SELECT id, SUM(counts) AS num FROM(
+SELECT requester_id AS id, COUNT(requester_id) AS counts FROM RequestAccepted
+GROUP BY requester_id
+UNION ALL
+SELECT accepter_id AS id, COUNT(accepter_id) AS counts FROM RequestAccepted
+GROUP BY accepter_id
+) AS final
+GROUP BY id
+ORDER BY num DESC
+LIMIT 1;
+```
+
+### 42. Investments in 2016
+
+[LeetCode #585](https://leetcode.com/problems/investments-in-2016/)
 ```sql
 
 ```
