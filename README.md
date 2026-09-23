@@ -530,6 +530,77 @@ LIMIT 1;
 
 [LeetCode #585](https://leetcode.com/problems/investments-in-2016/)
 ```sql
+SELECT ROUND(SUM(tiv_2016), 2) AS tiv_2016
+FROM Insurance
+WHERE (lat, lon) IN (
+    SELECT lat, lon
+    FROM Insurance
+    GROUP BY lat, lon
+    HAVING COUNT(*) = 1
+)
+AND tiv_2015 IN (
+    SELECT tiv_2015
+    FROM Insurance
+    GROUP BY tiv_2015
+    HAVING COUNT(*) > 1
+);
+```
+
+### 43. Department Top Three Salaries
+
+[LeetCode #185](https://leetcode.com/problems/department-top-three-salaries/)
+```sql
+SELECT d.name AS department, e.name AS employee, salary FROM Employee e 
+LEFT JOIN Department d 
+ON e.departmentId=d.id
+WHERE e.id IN(
+SELECT id FROM (
+SELECT *, DENSE_RANK() OVER(PARTITION BY departmentId ORDER BY salary DESC) AS ranking FROM Employee e
+) ranks WHERE ranking<=3
+) ;
+```
+
+### 44. Fix Names in a Table
+
+[LeetCode #1667](https://leetcode.com/problems/fix-names-in-a-table/)
+```sql
+# Write your MySQL query statement below
+SELECT user_id, CONCAT(
+    UPPER(
+        LEFT(name,1)
+    ),
+    LOWER(
+        SUBSTRING(name,2,LENGTH(name)
+        )
+     )
+ ) AS name FROM Users
+ ORDER BY user_id;
+```
+
+### 45. Patients With a Condition
+
+[LeetCode #1527](https://leetcode.com/problems/patients-with-a-condition/)
+```sql
+SELECT * FROM Patients
+WHERE REGEXP_LIKE(conditions,'\\sDIAB1') OR REGEXP_LIKE(SUBSTRING(conditions,1,5),'DIAB1');
+```
+
+### 46. Delete Duplicate Emails
+
+[LeetCode #196](https://leetcode.com/problems/delete-duplicate-emails/)
+```sql
+DELETE FROM Person WHERE id IN (
+    SELECT id FROM (
+        SELECT id,ROW_NUMBER() OVER(PARTITION BY email ORDER BY id ASC) AS ranking 
+        FROM Person
+        ) temp
+WHERE ranking>1)
+```
+
+### 47. Second Highest Salary
+
+[LeetCode #176](https://leetcode.com/problems/second-highest-salary/)
+```sql
 
 ```
 
