@@ -514,13 +514,13 @@ ORDER BY c.visited_on ASC
 
 [LeetCode #1321](https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/)
 ```sql
-SELECT id, SUM(counts) AS num FROM(
-SELECT requester_id AS id, COUNT(requester_id) AS counts FROM RequestAccepted
-GROUP BY requester_id
-UNION ALL
-SELECT accepter_id AS id, COUNT(accepter_id) AS counts FROM RequestAccepted
-GROUP BY accepter_id
-) AS final
+WITH CTE AS(
+    SELECT requester_id id FROM RequestAccepted
+    UNION ALL
+    SELECT accepter_id id FROM RequestAccepted
+)
+SELECT id , COUNT(*) AS num
+From CTE
 GROUP BY id
 ORDER BY num DESC
 LIMIT 1;
