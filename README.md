@@ -594,13 +594,47 @@ DELETE FROM Person WHERE id IN (
         SELECT id,ROW_NUMBER() OVER(PARTITION BY email ORDER BY id ASC) AS ranking 
         FROM Person
         ) temp
-WHERE ranking>1)
+WHERE ranking>1);
 ```
 
 ### 47. Second Highest Salary
 
 [LeetCode #176](https://leetcode.com/problems/second-highest-salary/)
 ```sql
+SELECT IF(COUNT(salary)=0,NULL,(SELECT DISTINCT salary FROM Employee
+ORDER BY salary DESC
+LIMIT 1 OFFSET 1)) AS SecondHighestSalary FROM Employee;
+```
 
+### 48. Group Sold Products By The Date
+
+[LeetCode #1484](https://leetcode.com/problems/group-sold-products-by-the-date/)
+```sql
+SELECT sell_date,COUNT(DISTINCT(product)) AS num_sold,
+GROUP_CONCAT(DISTINCT product ORDER BY product ASC) AS products
+FROM Activities
+GROUP BY sell_date
+ORDER BY sell_date
+```
+
+### 49. List the Products Ordered in a Period
+
+[LeetCode #1327](https://leetcode.com/problems/list-the-products-ordered-in-a-period/)
+```sql
+SELECT product_name, SUM(unit) AS unit FROM Products p
+LEFT JOIN Orders o 
+ON p.product_id=o.product_id
+WHERE year(order_date)= 2020 AND month(order_date) = 2
+GROUP BY p.product_id
+HAVING unit>=100;
+```
+
+### 50. Find Users With Valid E-Mails
+
+[LeetCode #1517](https://leetcode.com/problems/find-users-with-valid-e-mails/)
+```sql
+SELECT *
+FROM Users
+WHERE REGEXP_LIKE(mail,'^[A-Za-z][A-Za-z0-9_.-]*@leetcode[.]com$','c');
 ```
 
