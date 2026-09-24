@@ -35,7 +35,7 @@ WHERE area>=3000000 OR population >=25000000;
 
 ### 04. Article Views I
 
-[LeetCode #1148](https://leetcode.com/problems/articles-views-i/)
+[LeetCode #1148](https://leetcode.com/problems/article-views-i)
 
 ```sql
 SELECT DISTINCT author_id as id FROM Views
@@ -94,7 +94,7 @@ WHERE w2.temperature>w1.temperature;
 
 ### 10. Average Time of Process per Machine
 
-[LeetCode #1661](https://leetcode.com/average-time-of-process-per-machine/)
+[LeetCode #1661](https://leetcode.com/problems/average-time-of-process-per-machine/)
 
 ```sql
 SELECT a1.machine_id, ROUND(AVG(a2.timestamp-a1.timestamp),3) AS processing_time FROM Activity a1
@@ -182,7 +182,7 @@ GROUP BY p.project_id;
 
 ### 18. Percentage of users Attended a Contest
 
-[LeetCode #1633](https://leetcode.com/problems/percentage-of-users-attended-a-contest)
+[LeetCode #1633](https://leetcode.com/problems/percentage-of-users-attended-a-contest/)
 
 ```sql
 SELECT contest_id, ROUND(COUNT(user_id)/(SELECT COUNT(user_id)FROM Users)*100,2) AS percentage FROM Register
@@ -192,7 +192,7 @@ ORDER BY percentage DESC, contest_id ASC;
 
 ### 19. Queries Quality and Percentage
 
-[LeetCode #1211](https://leetcode.com/problems/queries-quality-and-percentage)
+[LeetCode #1211](https://leetcode.com/problems/queries-quality-and-percentage/)
 
 ```sql
 SELECT query_name, ROUND(AVG(rating/position),2) AS quality,
@@ -203,7 +203,7 @@ GROUP BY query_name;
 
 ### 20. Monthly Transactions I
 
-[LeetCode #1193](https://leetcode.com/problems/monthly-transactions-i)
+[LeetCode #1193](https://leetcode.com/problems/monthly-transactions-i/)
 
 ```sql
 SELECT LEFT(trans_date,7) AS month, country, COUNT(id) AS trans_count,
@@ -216,7 +216,7 @@ GROUP BY month, Country;
 
 ### 21. Immediate Food Delivery II
 
-[LeetCode #1174](https://leetcode.com/problems/immediate-food-delivery-ii)
+[LeetCode #1174](https://leetcode.com/problems/immediate-food-delivery-ii/)
 
 ```sql
 SELECT ROUND(COUNT(IF(order_date=customer_pref_delivery_date,1,NULL))/COUNT(customer_id)*100,2) AS immediate_percentage FROM Delivery
@@ -261,7 +261,7 @@ GROUP BY activity_date;
 
 ### 25. Product Sales Analysis III
 
-[LeetCode #1070](https://leetcode.com/problems/product-sales-analysis-iii)
+[LeetCode #1070](https://leetcode.com/problems/product-sales-analysis-iii/)
 
 ```sql
 SELECT product_id, year AS first_year, quantity, price FROM Sales 
@@ -293,7 +293,7 @@ ORDER BY user_id ASC;
 
 ### 28. Biggest Single Number
 
-[LeetCode #619](https://leetcode.com/problems/iggest-single-number/)
+[LeetCode #619](https://leetcode.com/problems/biggest-single-number/)
 
 ```sql
 SELECT MAX(num) AS num FROM(
@@ -377,46 +377,6 @@ GROUP BY product_id
 )
 ```
 
-### 35. Last Person to Fit in the Bus
-
-[LeetCode #1204](https://leetcode.com/problems/last-person-to-fit-in-the-bus/)
-```sql
-SELECT q.person_name FROM Queue q 
-LEFT JOIN Queue qq ON q.turn >= qq.turn
-GROUP BY q.turn
-HAVING SUM(qq.weight) <= 1000
-ORDER BY sum(qq.weight) DESC
-LIMIT 1;
-
-OR
-
-SELECT person_name FROM (
-SELECT person_name, SUM(weight) OVER(ORDER BY turn) AS total_weight
-FROM Queue
-) a WHERE total_weight<=1000
-ORDER BY total_weight DESC
-LIMIT 1;
-```
-### 35. Last Person to Fit in the Bus
-
-[LeetCode #1204](https://leetcode.com/problems/last-person-to-fit-in-the-bus/)
-```sql
-SELECT q.person_name FROM Queue q 
-LEFT JOIN Queue qq ON q.turn >= qq.turn
-GROUP BY q.turn
-HAVING SUM(qq.weight) <= 1000
-ORDER BY sum(qq.weight) DESC
-LIMIT 1;
-
-OR
-
-SELECT person_name FROM (
-SELECT person_name, SUM(weight) OVER(ORDER BY turn) AS total_weight
-FROM Queue
-) a WHERE total_weight<=1000
-ORDER BY total_weight DESC
-LIMIT 1;
-```
 ### 35. Last Person to Fit in the Bus
 
 [LeetCode #1204](https://leetcode.com/problems/last-person-to-fit-in-the-bus/)
